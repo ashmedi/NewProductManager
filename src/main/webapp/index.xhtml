@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="./template.xhtml">
+        <ui:define name="body">
+            <h:form>
+                <p:panel id="panel" header="Products" style="margin-bottom:10px;">
+                    <p:dataTable var="product" value="#{products.allProducts}">
+                        <p:column headerText="Currency">
+                            <h:outputText value="#{product.currency}" />
+                        </p:column>
+
+                        <p:column headerText="Price">
+                            <h:outputText value="#{product.price}" />
+                        </p:column>
+
+                        <p:column headerText="Name">
+                            <h:outputText value="#{product.name}" />
+                        </p:column>
+
+                        <p:column headerText="Category">
+                            <h:outputText value="#{product.category.name}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
