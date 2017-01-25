@@ -58,11 +58,9 @@ public class UserOrderItem implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.userOrder);
-        hash = 97 * hash + this.quantity;
-        hash = 97 * hash + Objects.hashCode(this.product);
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + this.quantity;
         return hash;
     }
 

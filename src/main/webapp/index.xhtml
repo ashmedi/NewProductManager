@@ -41,7 +41,9 @@
                         </p:column>
                     </p:dataTable>
                 </p:panel>
-            </h:form>
+                
+                <p:commandButton value="Add Order" update="ordersPanel" actionListener="#{orders.addOrder()}" icon="ui-icon-check" />
+            </h:form>    
         </ui:define>
     </ui:composition>
 </html>

@@ -58,9 +58,8 @@ public class UserOrder implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.id);
-        hash = 83 * hash + Objects.hashCode(this.username);
-        hash = 83 * hash + Objects.hashCode(this.items);
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.username);
         return hash;
     }
 

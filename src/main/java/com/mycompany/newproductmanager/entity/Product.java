@@ -73,11 +73,10 @@ public class Product implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.price);
-        hash = 97 * hash + Objects.hashCode(this.currency);
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Objects.hashCode(this.category);
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.price);
+        hash = 29 * hash + Objects.hashCode(this.currency);
+        hash = 29 * hash + Objects.hashCode(this.name);
         return hash;
     }
 

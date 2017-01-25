@@ -22,6 +22,11 @@ public class UserOrdersBean {
     @EJB
     private UserOrderEjb userOrderEjb;    
     
+    
+    public void addOrder() {
+        userOrderEjb.addOrder();        
+    }
+    
     public DataModel getAllOrders() {
         List<UserOrder> rows = userOrderEjb.getAllOrders();
         System.out.println(rows.size());

@@ -22,8 +22,7 @@ public class UserOrderEjb {
     private EntityManager em;
 
     @Transactional
-    public List<UserOrder> getAllOrders() {
-        
+    public void addOrder() {
         Query query = em.createNamedQuery("GetAllProducts");
         List<Product> products = query.getResultList();
         
@@ -38,9 +37,12 @@ public class UserOrderEjb {
         items.add(item);
         uo.setItems(items);
         em.persist(uo);
-        
-        Query query2 = em.createNamedQuery("GetAllOrders");
-        List<UserOrder> all = query2.getResultList();
+    }
+    
+    @Transactional
+    public List<UserOrder> getAllOrders() {        
+        Query query = em.createNamedQuery("GetAllOrders");
+        List<UserOrder> all = query.getResultList();
         return all;
         
     }
