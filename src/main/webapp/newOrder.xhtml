@@ -6,11 +6,30 @@
         <ui:define name="body">
             <h:form id="form">
                 <p:panel header="New Order" > 
-                    <h:panelGrid columns="2" cellpadding="5" id="matchGrid">
-                        <h:outputLabel value="Username:"  />
-                        <p:inputText id="input1" value="#{orders.order.username}" label="Firstname"  size="25"/>  
+                    
+                    <h:panelGrid columns="2" cellpadding="5" id="orderItemGrid">
+                        <h:outputLabel value="Product quantity:"  />
+                        <p:inputText id="qnt" value="#{orders.orderItem.quantity}" label="Quantity"  size="25"/>  
                     </h:panelGrid>
-                    <p:commandButton value="Create" update="matchGrid" action="#{orders.saveOrder()}" icon="ui-icon-check" />
+                    <p:commandButton value="Add product to order" update="selectedProducts" action="#{orders.addOrderItem}" icon="ui-icon-check" />
+                    
+                    <h:panelGrid columns="2" cellpadding="5" id="orderGrid">
+                        <h:outputLabel value="Username:"  />
+                        <p:inputText id="un" value="#{orders.order.username}" label="Firstname"  size="25"/>  
+                    </h:panelGrid>
+                    <p:commandButton value="Create" update="orderGrid" action="#{orders.saveOrder()}" icon="ui-icon-check" />
+                </p:panel>
+                
+                <p:panel id="selectedProducts" header="Current order" style="margin-bottom:10px;">
+                    <p:dataTable var="orderItem" value="#{orders.currentOrderItems}">
+                        <p:column headerText="Quantity:">
+                            <h:outputText value="#{orderItem.quantity}" />
+                        </p:column>
+
+                        <p:column headerText="Product:">
+                            <h:outputText value="#{orderItem.product.name}" />
+                        </p:column>
+                    </p:dataTable>
                 </p:panel>
             </h:form>
         </ui:define>
