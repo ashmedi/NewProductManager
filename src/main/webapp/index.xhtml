@@ -6,7 +6,7 @@
     <ui:composition template="./template.xhtml">
         <ui:define name="body">
             <h:form>
-                <p:panel id="panel" header="Products" style="margin-bottom:10px;">
+                <p:panel id="productsPanel" header="Products" style="margin-bottom:10px;">
                     <p:dataTable var="product" value="#{products.allProducts}">
                         <p:column headerText="Currency">
                             <h:outputText value="#{product.currency}" />
@@ -22,6 +22,22 @@
 
                         <p:column headerText="Category">
                             <h:outputText value="#{product.category.name}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+                
+                <p:panel id="ordersPanel" header="Orders" style="margin-bottom:10px;">
+                    <p:dataTable var="order" value="#{orders.allOrders}">
+                        <p:column headerText="Id">
+                            <h:outputText value="#{order.id}" />
+                        </p:column>       
+                        
+                        <p:column headerText="User Name">
+                            <h:outputText value="#{order.username}" />
+                        </p:column>
+                        
+                        <p:column headerText="Items">
+                            <h:outputText value="#{order.items}" />
                         </p:column>
                     </p:dataTable>
                 </p:panel>
