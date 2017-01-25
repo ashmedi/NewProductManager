@@ -118,8 +118,8 @@
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>1.1.0.Final</version>
                 <configuration>
-                    <hostname>localhost</hostname>
-                    <port>8080</port>
+                    <hostname>127.0.0.1</hostname>
+                    <port>9990</port>
                     <!--<username>administrator</username>
                     <password>Password1!</password>-->
                 </configuration>
