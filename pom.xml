@@ -67,6 +67,24 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>src/main/resources/config.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
@@ -118,7 +136,7 @@
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>1.1.0.Final</version>
                 <configuration>
-                    <hostname>127.0.0.1</hostname>
+                    <hostname>${server.host}</hostname>
                     <port>9990</port>
                     <!--<username>administrator</username>
                     <password>Password1!</password>-->
@@ -164,7 +182,7 @@
                                         <connection-url>jdbc:mysql://localhost:3307/test</connection-url>
                                         <jndi-name>java:jboss/pdm2</jndi-name>
                                         <enabled>true</enabled>
-                                        <user-name>root</user-name>
+                                        <user-name>${db.user}</user-name>
                                         <password>pikula</password>
                                         <driver-name>mysql-connector-java-6.0.5.jar</driver-name>
                                         <use-ccm>false</use-ccm>
@@ -189,6 +207,55 @@
             </plugin>
         </plugins>
     </build>
+    
+    <profiles>
+        <profile>
+            <id>load-data</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <version>1.5</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>mysql</groupId>
+                                <artifactId>mysql-connector-java</artifactId>
+                                <version>6.0.5</version>
+                            </dependency>            
+                        </dependencies>
+                        <configuration>
+                            <driver>com.mysql.jdbc.Driver</driver>
+                            <url>jdbc:mysql://localhost:3307/test</url>
+                            <username>root</username>
+                            <password>pikula</password>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>install</phase>
+                                <id>default-cli</id>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <delimiter>/</delimiter>
+                                    <delimiterType>normal</delimiterType>
+                                    <autocommit>true</autocommit>
+                                    <fileset>
+                                        <basedir>${basedir}</basedir>
+                                        <includes>
+                                            <include>src/main/resources/data.sql</include>
+                                        </includes>
+                                    </fileset>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    
     <repositories>
         <repository>
             <id>unknown-jars-temp-repo</id>

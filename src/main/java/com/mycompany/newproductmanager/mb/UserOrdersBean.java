@@ -1,8 +1,6 @@
 package com.mycompany.newproductmanager.mb;
 
-import com.mycompany.newproductmanager.ejb.ProductEjb;
 import com.mycompany.newproductmanager.ejb.UserOrderEjb;
-import com.mycompany.newproductmanager.entity.Product;
 import com.mycompany.newproductmanager.entity.UserOrder;
 import java.util.List;
 import javax.ejb.EJB;
@@ -21,10 +19,20 @@ public class UserOrdersBean {
     
     @EJB
     private UserOrderEjb userOrderEjb;    
-    
+    private UserOrder order = new UserOrder();
     
     public void addOrder() {
         userOrderEjb.addOrder();        
+    }
+    
+    public UserOrder getOrder() {
+        return order;
+    }
+    
+    public String saveOrder() {
+        userOrderEjb.saveOrder(order);
+        order = new UserOrder();
+        return "index?faces-redirect=true";
     }
     
     public DataModel getAllOrders() {

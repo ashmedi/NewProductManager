@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
   xmlns:h="http://java.sun.com/jsf/html"
   xmlns:ui="http://java.sun.com/jsf/facelets"
-  xmlns:p="http://primefaces.org/ui"
-  xmlns:f="http://xmlns.jcp.org/jsf/core">
+  xmlns:p="http://primefaces.org/ui">
     <ui:composition template="./template.xhtml">
         <ui:define name="body">
             <h:form>
@@ -41,9 +40,8 @@
                         </p:column>
                     </p:dataTable>
                 </p:panel>
-                
-                <p:commandButton value="Add Order" update="ordersPanel" actionListener="#{orders.addOrder()}" icon="ui-icon-check" />
-            </h:form>    
+            </h:form>
+            <p:link outcome="newOrder.xhtml" value="Add new order"/>
         </ui:define>
     </ui:composition>
 </html>

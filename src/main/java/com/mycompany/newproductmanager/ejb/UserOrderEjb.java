@@ -40,6 +40,22 @@ public class UserOrderEjb {
     }
     
     @Transactional
+    public void saveOrder(UserOrder order) {
+        Query query = em.createNamedQuery("GetAllProducts");
+        List<Product> products = query.getResultList();
+        
+        
+        List<UserOrderItem> items = new ArrayList<>();
+        UserOrderItem item = new UserOrderItem();
+        item.setQuantity(666);
+        item.setUserOrder(order);
+        item.setProduct(products.get(0));
+        items.add(item);
+        order.setItems(items);
+        em.persist(order);
+    }
+    
+    @Transactional
     public List<UserOrder> getAllOrders() {        
         Query query = em.createNamedQuery("GetAllOrders");
         List<UserOrder> all = query.getResultList();

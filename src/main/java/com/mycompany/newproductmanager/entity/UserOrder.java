@@ -25,7 +25,7 @@ import javax.persistence.OneToMany;
 public class UserOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     @OneToMany(mappedBy = "userOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
