@@ -30,10 +30,6 @@ public class UserOrdersBean {
     private UserOrderItem orderItem = new UserOrderItem();
     private Product product = new Product();
     
-    public void addOrder() {
-        userOrderEjb.addOrder();        
-    }
-    
     public UserOrder getOrder() {
         return order;
     }

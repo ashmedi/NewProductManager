@@ -6,37 +6,47 @@
     <ui:composition template="./template.xhtml">
         <ui:define name="body">
             <h:form id="form">
-                <p:panel header="New Order" > 
+                <p:panel header="Add Order" > 
                     
-                    <h:panelGrid columns="2" cellpadding="5" id="orderItemGrid">
-                        <h:outputLabel value="Product quantity:"  />
-                        <p:inputText id="qnt" value="#{orders.orderItem.quantity}" label="Quantity"  size="25"/>  
-                        
-                        <p:outputLabel value="Product: " />
-                        <p:selectOneMenu id="prod" value="#{orders.product}" converter="productConverter" style="width:150px">
-                                <f:selectItems value="#{orders.products}" var="product" itemLabel="#{product.name}" itemValue="#{product}"/>
-                        </p:selectOneMenu>
-                    </h:panelGrid>
-                    <p:commandButton value="Add product to order" update="selectedProducts" action="#{orders.addOrderItem}" icon="ui-icon-check" />
-                    
-                    <h:panelGrid columns="2" cellpadding="5" id="orderGrid">
-                        <h:outputLabel value="Username:"  />
-                        <p:inputText id="un" value="#{orders.order.username}" label="Firstname"  size="25"/>  
-                    </h:panelGrid>
-                    <p:commandButton value="Create" update="orderGrid" action="#{orders.saveOrder()}" icon="ui-icon-check" />
-                </p:panel>
-                
-                <p:panel id="selectedProducts" header="Current order" style="margin-bottom:10px;">
-                    <p:dataTable var="orderItem" value="#{orders.currentOrderItems}">
-                        <p:column headerText="Quantity:">
-                            <h:outputText value="#{orderItem.quantity}" />
-                        </p:column>
+                    <p:panel id="newItems" header="Add products" style="margin-bottom:10px;">
+                        <h:panelGrid columns="2" cellpadding="5" id="orderItemGrid">
+                            <h:outputLabel value="Product quantity"  />
+                            <p:inputText id="qnt" value="#{orders.orderItem.quantity}" label="Quantity"  size="25"/>  
 
-                        <p:column headerText="Product:">
-                            <h:outputText value="#{orderItem.product}" />
-                        </p:column>
-                    </p:dataTable>
-                </p:panel>
+                            <p:outputLabel value="Product " />
+                            <p:selectOneMenu id="prod" value="#{orders.product}" converter="productConverter" style="width:150px">
+                                    <f:selectItems value="#{orders.products}" var="product" itemLabel="#{product.name}" itemValue="#{product}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        <p:commandButton value="Add product to order" update="selectedProducts" action="#{orders.addOrderItem}" icon="ui-icon-check" />
+                    </p:panel>
+                    
+                    <p:panel id="selectedProducts" header="Currently selected products" style="margin-bottom:10px;">
+                        <p:dataTable var="orderItem" value="#{orders.currentOrderItems}">
+                            <p:column headerText="Quantity">
+                                <h:outputText value="#{orderItem.quantity}" />
+                            </p:column>
+
+                            <p:column headerText="Product name">
+                                <h:outputText value="#{orderItem.product.name}" />
+                            </p:column>
+
+                            <p:column headerText="Unit price">
+                                <h:outputText value="#{orderItem.product.price} #{orderItem.product.currency}" />
+                            </p:column>
+
+                            <p:column headerText="Total price">
+                                <h:outputText value="#{orderItem.product.price * orderItem.quantity} #{orderItem.product.currency}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                                                            
+                    <h:panelGrid columns="2" cellpadding="5" id="orderGrid">
+                        <h:outputLabel value="Username"  />
+                        <p:inputText id="un" value="#{orders.order.username}" label="Username"  size="25"/>  
+                    </h:panelGrid>                    
+                    <p:commandButton value="Order!" update="orderGrid" action="#{orders.saveOrder()}" icon="ui-icon-check" />
+                </p:panel>                                
             </h:form>
             <p:link outcome="index.xhtml" value="Home"/>
         </ui:define>
