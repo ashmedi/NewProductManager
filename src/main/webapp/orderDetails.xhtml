@@ -1,13 +1,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition template="./template.xhtml">
         <ui:define name="body">
             <h:form id="form">
-                <p:panel header="Order Details" > 
-                    <h:outputLabel value="#{orders.getOrder(param['orderId'])}"  />
-                </p:panel>                                
+                <p:panel header="Order details for: #{param['orderId']}"> 
+                    <c:set var="order" value="#{orders.getOrder(param['orderId'])}" scope="request" />
+                    
+                    <p:panel id="products" header="Products" style="margin-bottom:10px;">
+                        <p:dataTable var="orderItem" value="#{order.items}">
+                            <p:column headerText="Quantity">
+                                <h:outputText value="#{orderItem.quantity}" />
+                            </p:column>
+
+                            <p:column headerText="Product name">
+                                <h:outputText value="#{orderItem.product.name}" />
+                            </p:column>
+
+                            <p:column headerText="Unit price">
+                                <h:outputText value="#{orderItem.product.price} #{orderItem.product.currency}" />
+                            </p:column>
+
+                            <p:column headerText="Total price">
+                                <h:outputText value="#{orderItem.product.price * orderItem.quantity} #{orderItem.product.currency}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                                                            
+                    <h:panelGrid columns="2" cellpadding="5" id="orderGrid">
+                        <h:outputLabel value="Username"  />
+                        <h:outputLabel id="un" value="#{order.username}"/>  
+                    </h:panelGrid>                                        
+                </p:panel>     
+                                             
             </h:form>
             <p:link outcome="index.xhtml" value="Home"/>
         </ui:define>
