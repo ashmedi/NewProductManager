@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="./template.xhtml">
         <ui:define name="body">
             <h:form id="form">
@@ -10,6 +11,11 @@
                     <h:panelGrid columns="2" cellpadding="5" id="orderItemGrid">
                         <h:outputLabel value="Product quantity:"  />
                         <p:inputText id="qnt" value="#{orders.orderItem.quantity}" label="Quantity"  size="25"/>  
+                        
+                        <p:outputLabel value="Product: " />
+                        <p:selectOneMenu id="prod" value="#{orders.product}" converter="productConverter" style="width:150px">
+                                <f:selectItems value="#{orders.products}" var="product" itemLabel="#{product.name}" itemValue="#{product}"/>
+                        </p:selectOneMenu>
                     </h:panelGrid>
                     <p:commandButton value="Add product to order" update="selectedProducts" action="#{orders.addOrderItem}" icon="ui-icon-check" />
                     
@@ -27,11 +33,12 @@
                         </p:column>
 
                         <p:column headerText="Product:">
-                            <h:outputText value="#{orderItem.product.name}" />
+                            <h:outputText value="#{orderItem.product}" />
                         </p:column>
                     </p:dataTable>
                 </p:panel>
             </h:form>
+            <p:link outcome="index.xhtml" value="Home"/>
         </ui:define>
     </ui:composition>
 </html>

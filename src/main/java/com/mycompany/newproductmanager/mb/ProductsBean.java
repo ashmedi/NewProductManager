@@ -25,8 +25,6 @@ public class ProductsBean {
     
     public DataModel getAllProducts() {
         List<Product> rows = productEjb.getAllProducts();
-        System.out.println(rows.size());
-        rows.stream().forEach(r -> System.out.println(r));
         return new ListDataModel(rows);
     }
 }

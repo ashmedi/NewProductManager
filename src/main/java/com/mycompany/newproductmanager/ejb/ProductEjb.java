@@ -23,6 +23,9 @@ public class ProductEjb {
         Query query = em.createNamedQuery("GetAllProducts");
         List<Product> all = query.getResultList();
         return all;
-        
+    }
+    
+    public Product getById(Long id) {
+        return em.find(Product.class, id);
     }
 }
