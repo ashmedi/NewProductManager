@@ -55,7 +55,7 @@ public class UserOrdersBean {
             order.setItems(new ArrayList<>());
         }
         orderItem.setProduct(product);
-        order.getItems().add(orderItem);
+        addItemsToOrder();        
         orderItem.setUserOrder(order);
         orderItem = new UserOrderItem();
         product = new Product();
@@ -76,5 +76,18 @@ public class UserOrdersBean {
     public List<Product> getProducts() {
         List<Product> rows = productEjb.getAllProducts();
         return rows;
+    }
+
+    private void addItemsToOrder() {
+        boolean itemOfGivenTypeExists = false;
+        for (UserOrderItem item : order.getItems()) {
+            if (item.getProduct().getId().equals(orderItem.getProduct().getId())) {
+                item.setQuantity(item.getQuantity() + orderItem.getQuantity());
+                itemOfGivenTypeExists = true;
+            }
+        }
+        if (!itemOfGivenTypeExists) {
+            order.getItems().add(orderItem);
+        }
     }
 }
