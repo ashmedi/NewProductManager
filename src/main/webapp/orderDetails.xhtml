@@ -1,0 +1,15 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="./template.xhtml">
+        <ui:define name="body">
+            <h:form id="form">
+                <p:panel header="Order Details" > 
+                    <h:outputLabel value="#{orders.getOrder(param['orderId'])}"  />
+                </p:panel>                                
+            </h:form>
+            <p:link outcome="index.xhtml" value="Home"/>
+        </ui:define>
+    </ui:composition>
+</html>

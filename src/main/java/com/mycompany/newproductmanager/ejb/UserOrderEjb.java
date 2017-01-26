@@ -1,5 +1,6 @@
 package com.mycompany.newproductmanager.ejb;
 
+import com.mycompany.newproductmanager.entity.Product;
 import com.mycompany.newproductmanager.entity.UserOrder;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -29,5 +30,9 @@ public class UserOrderEjb {
         List<UserOrder> all = query.getResultList();
         return all;
 
+    }
+    
+    public UserOrder getById(Long id) {
+        return em.find(UserOrder.class, id);
     }
 }

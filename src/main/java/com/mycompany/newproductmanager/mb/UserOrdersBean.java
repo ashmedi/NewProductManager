@@ -73,6 +73,10 @@ public class UserOrdersBean {
         return new ListDataModel(rows);
     }
     
+    public UserOrder getOrder(Long id) {
+        return userOrderEjb.getById(id);
+    }
+    
     public List<Product> getProducts() {
         List<Product> rows = productEjb.getAllProducts();
         return rows;

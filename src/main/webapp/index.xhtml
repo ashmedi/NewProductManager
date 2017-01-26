@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
   xmlns:h="http://java.sun.com/jsf/html"
   xmlns:ui="http://java.sun.com/jsf/facelets"
-  xmlns:p="http://primefaces.org/ui">
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="./template.xhtml">
         <ui:define name="body">
             <h:form>
@@ -35,8 +36,10 @@
                             <h:outputText value="#{order.username}" />
                         </p:column>
                         
-                        <p:column headerText="Products">
-                            <h:outputText value="#{order.items}" />
+                        <p:column headerText="Details">
+                            <p:link outcome="orderDetails.xhtml" value="View details">
+                                <f:param name="orderId" value="#{order.id}" />
+                            </p:link>
                         </p:column>
                     </p:dataTable>
                 </p:panel>
